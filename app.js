@@ -2,6 +2,10 @@ const http = require('http'),
     express = require('express'),
     app = express();
 
+app.use('/ninja', (req, res, next) => {
+    res.send('Hello world from ninja page');
+});
+
 app.use((req, res, next) => {
     res.send('Hello world');
 });

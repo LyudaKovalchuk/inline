@@ -5,6 +5,12 @@ const request = require('request-promise-native'),
 chai.should();
 
 describe('Simple test on hw endpoint', () => {
+
+    it('No hello world page', async () => {
+        const response = await request.get(`http://localhost:${port}/ninja`);
+        response.should.not.equal('Hello world');
+    });
+
     it('Hello world page', async () => {
         const response = await request.get(`http://localhost:${port}`);
         response.should.equal('Hello world');
