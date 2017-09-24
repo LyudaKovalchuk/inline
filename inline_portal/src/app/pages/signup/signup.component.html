@@ -1,0 +1,69 @@
+<div class="signup-form-container">
+  <h1>Sign Up</h1>
+
+  <form #signup="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input #email="ngModel" [(ngModel)]="model.email" type="text" name="email" class="form-control" id="email" required email>
+
+      <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
+        <div [hidden]="!email.errors.required">
+          <p>Email is required</p>
+        </div>
+        <div [hidden]="email.errors.required || !email.errors.email">
+          <p>Not valid email</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input #name="ngModel" [(ngModel)]="model.name" type="text" name="name" class="form-control" id="name" required>
+
+      <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-danger">
+        <div [hidden]="!name.errors.required">
+          <p>Name is required</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="form-group">
+      <label for="password">Password</label>
+      <input #password="ngModel" required minlength="6" [(ngModel)]="model.password" type="password" name="password" class="form-control" id="password">
+
+      <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
+        <div [hidden]="!password.errors.required">
+          <p>Password is required</p>
+        </div>
+        <div [hidden]="!password.errors.minlength">
+          <p>Password must be at least 6 characters long</p>
+        </div>
+      </div>
+    </div>
+      <div class="form-group">
+      <label for="re_password">Repeat password</label>
+      <input #re_password="ngModel" required minlength="6" [(ngModel)]="model.re_password" type="password" name="password-repeat" class="form-control" id="re_password">
+
+      <div *ngIf="re_password.errors && (re_password.dirty || re_password.touched)" class="alert alert-danger">
+        <div [hidden]="!re_password.errors.required">
+          <p>Password is required</p>
+        </div>
+        <div [hidden]="!re_password.errors.minlength">
+          <p>Password must be at least 6 characters long</p>
+        </div>
+      </div>
+    </div>
+      <div *ngIf="!re_password.errors && !password.errors && (model.password == model.re_password)" class="alert alert-success">
+        <p>Password matches</p>
+      </div>
+      <div *ngIf="!re_password.errors && !password.errors && (model.password != model.re_password)" class="alert alert-danger">
+        <p>Password doesn't match</p>
+      </div>
+    </div>
+
+    <button [disabled]="!signup.form.valid" type="submit" class="btn btn-success">Sign Up</button>
+
+  </form>
+
+</div>

@@ -1,0 +1,17 @@
+# compiled output
+dist/
+tmp/
+
+# dependencies
+node_modules/
+
+# IDEs and editors
+.idea/
+
+# System Files
+.DS_Store
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
