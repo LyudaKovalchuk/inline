@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node app.js",
-    "test": "MOCHA_FILE=./jenkins-test-results.xml ./node_modules/.bin/mocha test/** --reporter mocha-junit-reporter"
+    "test": "./node_modules/.bin/mocha test/**",
+    "test-jenkins": "MOCHA_FILE=./jenkins-test-results.xml ./node_modules/.bin/mocha test/** --reporter mocha-junit-reporter"
   },
   "dependencies": {
     "chai": "^4.1.2",
