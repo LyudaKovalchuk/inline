@@ -1,0 +1,1 @@
+module.exports = () => "MATCH (n) DETACH DELETE n;";

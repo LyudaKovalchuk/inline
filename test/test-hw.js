@@ -1,24 +1,16 @@
 const request = require('request-promise-native'),
-    chai = require('chai'),
+    expect = require('chai').expect,
     port = process.env.PORT || 8080;
 
-chai.should();
 
-describe('Simple test on hw endpoint', () => {
+describe('Service end-to-end tests', () => {
 
-    it('No hello world page', async () => {
-        const response = await request.get(`http://localhost:${port}/ninja`);
-        response.should.not.equal('Hello world');
+    it('Request "Harry Potter" films', async () => {
+        const body = await request.get(`http://localhost:${port}/films/harry_potter`),
+            films = JSON.parse(body);
+
+        expect(films).to.have.length(8);
     });
 
-    it('Hello world page', async () => {
-        const response = await request.get(`http://localhost:${port}`);
-        response.should.equal('Hello world');
-    });
 
-    it('Hello world letter count', async () => {
-        const response = await request.get(`http://localhost:${port}`);
-        response.should.have.lengthOf('Hello world'.length);
-    });
 });
-

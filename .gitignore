@@ -11,6 +11,9 @@ node_modules/
 # System Files
 .DS_Store
 
+#Archives
+*.zip
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

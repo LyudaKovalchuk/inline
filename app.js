@@ -1,24 +1,25 @@
-const http = require('http'),
+const config = require('config'),
+    http = require('http'),
     express = require('express'),
-    app = express();
+    app = express(),
+    Neo4J = require('services/neo4j'),
+    bodyParser = require('body-parser');
 
-app.use('/ninja', (req, res, next) => {
-    res.send('Hello world from ninja page');
-});
-
-app.use((req, res, next) => {
-    res.send('Hello world');
-});
-
-app.use((err, req, res, next) => {
-    res.send('Express error handler');
-});
+Neo4J.connect(config.neo4j)
+    .on('completed', () => console.log('Neo4j connection was successfully established'))
+    .on('error', (error) => console.log(`Neo4j driver instantiation failed: ${error}`));
 
 const server = http.createServer(app),
     port = process.env.PORT || 8080;
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(require('router'));
+
 server.listen(port, (err) => {
     if(err)
         throw err;
+
+    Neo4J.checkConnection();
     console.log(`Server was started successfully on port: ${port}`);
 });
